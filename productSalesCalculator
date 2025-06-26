@@ -3,52 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sales Page</title>
+  <title>NextGen Desktops - Sales Page</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      background: #121212;
+      color: #eee;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
       min-height: 100vh;
       margin: 0;
     }
+
+    header, footer {
+      background: #1f1f1f;
+      padding: 15px 0;
+      text-align: center;
+      color: #00bfff;
+      font-weight: bold;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
     .product-card {
-      background: #fff;
+      background: #1e1e1e;
       padding: 20px;
       border-radius: 10px;
       max-width: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
       text-align: center;
     }
+
     .product-card img {
       width: 100%;
       border-radius: 10px;
     }
+
     .product-card h1 {
       font-size: 24px;
       margin: 10px 0;
+      color: #00bfff;
     }
+
     .product-card p.description {
       font-size: 14px;
-      color: #555;
+      color: #ccc;
     }
+
     .product-card p.price {
       font-size: 18px;
       font-weight: bold;
       margin: 10px 0;
+      color: #fff;
     }
+
     .product-card p.qty {
       font-size: 16px;
       margin: 5px 0;
+      color: #fff;
     }
+
     .product-card input {
       padding: 5px;
       width: 60px;
       text-align: center;
       margin: 5px;
+      background: #333;
+      border: 1px solid #555;
+      color: #fff;
+      border-radius: 5px;
     }
+
     .product-card button {
       padding: 10px 20px;
       font-size: 16px;
@@ -59,40 +90,57 @@
       cursor: pointer;
       margin: 5px;
     }
+
     .product-card button.restock {
       background: #007bff;
     }
+
     .product-card button:disabled {
-      background: #ccc;
+      background: #555;
       cursor: not-allowed;
     }
+
     #message {
       margin-top: 10px;
-      color: blue;
+      color: #00bfff;
       font-weight: bold;
+    }
+
+    footer {
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="product-card">
-    <img src="images.jpg" alt="Product Image">
-    <h1>Awesome Gadget</h1>
-    <p class="description">This is an amazing gadget that helps you stay productive and entertained. Compact, durable, and stylish!</p>
-    <p class="price">Price: ₹999</p>
-    <p class="qty">Available Quantity: <span id="qty">--</span></p>
+  <header>
+    NextGen Desktops
+  </header>
 
-    <div>
-      <input type="number" id="buyAmount" min="1" placeholder="Buy Qty">
-      <button id="buyBtn" onclick="buyProduct()">Buy Now</button>
+  <div class="content">
+    <div class="product-card">
+      <img src="comp.jpg" alt="Product Image">
+      <h1>HP</h1>
+      <p class="description">This is an amazing computer that helps you stay productive and entertained. Compact, durable, and stylish!</p>
+      <p class="price">Price: ₹9999</p>
+      <p class="qty">Available Quantity: <span id="qty">--</span></p>
+
+      <div>
+        <input type="number" id="buyAmount" min="1" placeholder="Buy Qty">
+        <button id="buyBtn" onclick="buyProduct()">Buy Now</button>
+      </div>
+
+      <div>
+        <input type="number" id="restockAmount" min="1" placeholder="Restock Qty">
+        <button class="restock" onclick="restockProduct()">Restock</button>
+      </div>
+
+      <p id="message"></p>
     </div>
-
-    <div>
-      <input type="number" id="restockAmount" min="1" placeholder="Restock Qty">
-      <button class="restock" onclick="restockProduct()">Restock</button>
-    </div>
-
-    <p id="message"></p>
   </div>
+
+  <footer>
+    &copy; 2025 NextGen Desktops. All rights reserved.
+  </footer>
 
   <script>
     let quantity = localStorage.getItem('productQty');
