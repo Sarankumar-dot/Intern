@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Billing Software</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 15px;
+        }
+        .section input {
+            margin: 5px;
+            padding: 5px;
+        }
+        button {
+            padding: 6px 12px;
+            margin-top: 5px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BILLING SECTION</h1>
+        <div class="section">
+            <label>Customer Name:</label>
+            <input type="text" id="customerName" placeholder="Enter customer name">
+        </div>
+
+        <div class="section">
+            <label>Product Name:</label>
+            <input type="text" id="productName" placeholder="Product name">
+            <label>Quantity:</label>
+            <input type="number" id="quantity" placeholder="Qty">
+            <label>Price:</label>
+            <input type="number" id="price" placeholder="Price">
+            <button onclick="addItem()">Add Item</button>
+        </div>
+
+        <h2>Invoice Items</h2>
+        <table id="invoiceTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Items will appear here -->
+            </tbody>
+        </table>
+
+        <h3 id="totalAmount">Total: ₹0.00</h3>
+        <button onclick="printInvoice()">Print Invoice</button>
+    </div>
+
+    <script>
+        let items = [];
+        let total = 0;
+
+        function addItem() {
+            const product = document.getElementById("productName").value;
+            const qty = parseInt(document.getElementById("quantity").value);
+            const price = parseFloat(document.getElementById("price").value);
+
+            if (!product || isNaN(qty) || isNaN(price)) {
+                alert("Please fill all fields correctly!");
+                return;
+            }
+
+            const subtotal = qty * price;
+            items.push({ product, qty, price, subtotal });
+            total += subtotal;
+
+            updateTable();
+            clearFields();
+        }
+
+        function updateTable() {
+            const tbody = document.querySelector("#invoiceTable tbody");
+            tbody.innerHTML = "";
+
+            items.forEach(item => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${item.product}</td>
+                    <td>${item.qty}</td>
+                    <td>₹${item.price.toFixed(2)}</td>
+                    <td>₹${item.subtotal.toFixed(2)}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+
+            document.getElementById("totalAmount").innerText = `Total: ₹${total.toFixed(2)}`;
+        }
+
+        function clearFields() {
+            document.getElementById("productName").value = "";
+            document.getElementById("quantity").value = "";
+            document.getElementById("price").value = "";
+        }
+
+        function printInvoice() {
+            const customerName = document.getElementById("customerName").value;
+            if (!customerName) {
+                alert("Please enter customer name before printing!");
+                return;
+            }
+
+            window.print();
+        }
+    </script>
+</body>
+</html>
