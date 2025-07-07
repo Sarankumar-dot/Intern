@@ -1,0 +1,40 @@
+.inputbox{
+    height: 27px;
+    width: 200px;
+   
+    border-radius: 5px;
+    border: solid 1px gray;
+    transition: all 0.5s;
+}
+
+
+.inputbox:hover{
+  
+    transition: all 0.5s;
+}
+
+ .reset{
+    height: 50px;
+    width: 100px;
+    border-radius: 25px;
+    font-size: large;   
+          
+}
+
+ .sub{
+    height: 50px;
+    width: 100px;
+    border-radius: 25px;
+    font-size: large;   
+    margin-left: 100px;      
+}
+
+.reset:hover{
+    background-color: skyblue;
+    transition: all 0.5s;
+}
+
+.sub:hover{
+    background-color: skyblue;
+    transition: all 0.5s;
+}
